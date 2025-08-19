@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You Win! Or Do You?</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', 'Chalkduster', 'cursive';
+            text-align: center;
+            background-color: #f0f8ff;
+            color: #333;
+            padding: 50px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            border: 2px dashed #ff69b4;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #ff69b4;
+            font-size: 2.5em;
+            text-shadow: 2px 2px #d3d3d3;
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            color: #00bfff;
+            font-weight: bold;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 0.8em;
+            color: #777;
+        }
+
+        .cta-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .cta {
+            width: 30%;
+        }
+
+        .cta svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 10px;
+            fill: #ff69b4;
+        }
+
+        .final-step {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #fffacd;
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>You've Stumbled Upon a Web Dev Secret!</h1>
+        <p>This page might look like a joke, but it's actually demonstrating some cool, modern browser APIs.</p>
+        <p>Ever wonder how websites know when you've abandoned them? Part of the magic is the <span
+                class="highlight">'visibilitychange'</span> event. Your browser kindly tells us when you switch tabs,
+            minimize the window, or navigate away. Don't believe me? <a
+                href="https://developer.mozilla.org/en-US/docs/Web/API/Document/visibilitychange_event"
+                target="_blank">Read the docs!</a></p>
+        <p>But what do we do with that power? We could just cry, but instead, we use the <span
+                class="highlight">Beacon API</span>. It lets us send a little packet of data back to our server right as
+            you're leaving, without slowing down your escape. It's the perfect way to get in the last word. Check it out
+            here: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Beacon_API" target="_blank">Beacon API
+                docs</a>.</p>
+        <p>So go ahead, leave this page. We're watching. (Not in a creepy way, just in an analytical, data-driven
+            way.)</p>
+        <div class="final-step">
+            <h2>One Last Thing...</h2>
+            <p>After you leave this page, check the terminal where you're running the server. You'll see the beacon
+                message the browser sent!</p>
+        </div>
+        <div class="cta-container">
+            <div class="cta">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
+                </svg>
+                <p><strong>Navigate Away</strong></p>
+                <p>Just type a new URL in the address bar and press Enter.</p>
+            </div>
+            <div class="cta">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path
+                        d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+                </svg>
+                <p><strong>Close This Tab</strong></p>
+                <p>Click the 'X' on this tab. You know you want to.</p>
+            </div>
+            <div class="cta">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path
+                        d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z" />
+                </svg>
+                <p><strong>Close the Browser</strong></p>
+                <p>The most dramatic exit. Just close the whole application.</p>
+            </div>
+        </div>
+        <p class="footer">This page was built by Google Gemini.</p>
+    </div>
+    <script>
+        document.addEventListener('visibilitychange', function () {
+            if (document.visibilityState === 'hidden') {
+                const data = JSON.stringify({ session_end: Date.now() });
+                navigator.sendBeacon('http://localhost:3000/', data);
+            }
+        });
+    </script>
+</body>
+
+</html>
