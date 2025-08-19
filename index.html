@@ -71,6 +71,23 @@
             border: 2px solid #ffd700;
             border-radius: 10px;
         }
+
+        .code-block {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-align: left;
+            margin: 20px auto;
+            white-space: pre-wrap;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+        }
+
+        .code-block h2 {
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 
@@ -88,6 +105,15 @@
             you're leaving, without slowing down your escape. It's the perfect way to get in the last word. Check it out
             here: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Beacon_API" target="_blank">Beacon API
                 docs</a>.</p>
+        <div class="code-block">
+            <h2>The Magic Code</h2>
+            <pre><code>document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'hidden') {
+        const data = JSON.stringify({ session_end: Date.now() });
+        navigator.sendBeacon('http://localhost:3000/', data);
+    }
+});</code></pre>
+        </div>
         <p>So go ahead, leave this page. We're watching. (Not in a creepy way, just in an analytical, data-driven
             way.)</p>
         <div class="final-step">
